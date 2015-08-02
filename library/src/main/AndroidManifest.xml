@@ -1,3 +1,5 @@
-<manifest package="com.dd.circular.progress.button">
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.dd.circular.progress.button">
     <application/>
 </manifest>

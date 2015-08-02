@@ -2,27 +2,19 @@
 
 buildscript {
     repositories {
-        jcenter()
+        jcenter {
+            url 'http://jcenter.bintray.com'
+        }
     }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.14.2'
-    }
-}
 
-def isReleaseBuild() {
-    return version.contains("SNAPSHOT") == false
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.2.3'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
+    }
 }
 
 allprojects {
-    version = VERSION_NAME
-    group = GROUP
-
     repositories {
         jcenter()
-        maven {
-            url "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
     }
 }
-
-apply plugin: 'android-reporting'

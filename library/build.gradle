@@ -1,8 +1,9 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.jfrog.bintray'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion '21.1.2'
+    buildToolsVersion '22.0.1'
 
     defaultConfig {
         minSdkVersion 14
@@ -12,7 +13,7 @@ android {
     }
     buildTypes {
         release {
-            runProguard false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
@@ -22,5 +23,24 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
 
-// Used to push in maven
-//apply from: '../maven_push.gradle'
+version = VERSION_NAME
+group = GROUP
+
+bintray {
+    user = bintrayUser
+    key = bintrayApiKey
+
+    configurations = ['archives']
+    pkg {
+        repo = "maven"
+        name = PACKAGE_NAME
+        websiteUrl = POM_URL
+        vcsUrl = POM_SCM_CONNECTION
+        issueTrackerUrl = ISSUE_TRACKER_URL
+        licenses = ["Apache-2.0"]
+        publish = true
+        version {
+            name = '1.0.0' //Bintray logical version name
+        }
+    }
+}
